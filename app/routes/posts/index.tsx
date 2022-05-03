@@ -29,6 +29,9 @@ export default function Posts() {
           ))
         }
       </ul>
+      <Link to="admin" className="text-red-600 underline">
+        admin
+      </Link>
     </main>
   );
 }
