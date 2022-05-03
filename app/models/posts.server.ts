@@ -1,11 +1,12 @@
 import { prisma } from "~/db.server";
 
-export type { Post } from "@prisma/client";
+import type { Post } from "@prisma/client";
 
-type Post = {
-  slug: string,
-  title: string,
-}
+export type { Post };
+// type Post = {
+//   slug: string,
+//   title: string,
+// }
 
 export const getPosts = async (): Promise<Array<Post>> => {
   return prisma.post.findMany();
@@ -13,4 +14,8 @@ export const getPosts = async (): Promise<Array<Post>> => {
 
 export async function getPost(slug: string) {
   return prisma.post.findUnique({ where: { slug } });
+}
+
+export async function createPost(post: Pick<Post, "slug" | "title" | "markdown">) {
+  return prisma.post.create({ data: post });
 }
